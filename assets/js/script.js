@@ -89,8 +89,7 @@ function loadQues() {
         choicesdiv.appendChild(choice);
         choicesdiv.appendChild(choiceLabel);
         opt.appendChild(choicesdiv);
-    }
-    
+    }  
 }
 
 loadQues();
