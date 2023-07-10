@@ -2,11 +2,13 @@ var welcome = document.querySelector(".welcome");
 var panel = document.querySelector(".panel");
 var start = document.getElementById("start");
 var failure = document.querySelector(".failure");
+var scores = document.querySelector(".scores")
 
     start.addEventListener("click", function(){
 
         welcome.style.display = "none";
         panel.style.display = "flex";
+        timeEl.style.display = "flex"
         countdown()
     });
 
@@ -34,46 +36,46 @@ var failure = document.querySelector(".failure");
 
 
 const Questions = [{
-    q: "question 1?",
-    a: [{ text: "option1", isCorrect: false },
-    { text: "option2", isCorrect: false },
-    { text: "option3", isCorrect: true },
-    { text: "option4", isCorrect: false }
+    q: "The condition in an if/else statement is enclosed within ____",
+    a: [{ text: "quotes", isCorrect: false },
+    { text: "curly brackets", isCorrect: false },
+    { text: "parenthesis", isCorrect: true },
+    { text: "square brackets", isCorrect: false }
     ]
  
 },
 {
-    q: "question 2?",
-    a: [{ text: "option1", isCorrect: false, },
-    { text: "option2", isCorrect: false },
-    { text: "option3", isCorrect: false },
-    { text: "option4", isCorrect: true }
+    q: "Which of the following can be stored in Javscript Arrays?",
+    a: [{ text: "Numbers and Strings", isCorrect: false, },
+    { text: "Other Arrays", isCorrect: false },
+    { text: "Booleans", isCorrect: false },
+    { text: "All of the Above", isCorrect: true }
     ]
  
 },
 {
-    q: "question 3",
-    a: [{ text: "option1", isCorrect: false },
-    { text: "option2", isCorrect: false },
-    { text: "option3", isCorrect: true },
-    { text: "option4", isCorrect: false }
+    q: "What is a useful tool for debugging Javascript code?",
+    a: [{ text: "Javascript", isCorrect: false },
+    { text: "Terminal/bash", isCorrect: false },
+    { text: "console.log", isCorrect: true },
+    { text: "for loops", isCorrect: false }
     ]
  
 }
  
 ]
  
-var currQuestion = 0
+var currentQuestion = 0
 let score = 0
  
 function loadQues() {
     const question = document.getElementById("ques")
     const opt = document.getElementById("opt")
  
-    question.textContent = Questions[currQuestion].q;
+    question.textContent = Questions[currentQuestion].q;
     opt.innerHTML = ""
  
-    for (let i = 0; i < Questions[currQuestion].a.length; i++) {
+    for (let i = 0; i < Questions[currentQuestion].a.length; i++) {
         const choicesdiv = document.createElement("div");
         const choice = document.createElement("input");
         const choiceLabel = document.createElement("label");
@@ -82,7 +84,7 @@ function loadQues() {
         choice.name = "answer";
         choice.value = i;
  
-        choiceLabel.textContent = Questions[currQuestion].a[i].text;
+        choiceLabel.textContent = Questions[currentQuestion].a[i].text;
  
         choicesdiv.appendChild(choice);
         choicesdiv.appendChild(choiceLabel);
@@ -112,15 +114,15 @@ next.addEventListener("click", function(){
 })
 
 function nextQuestion() {
-    if (currQuestion < Questions.length - 1) {
-        currQuestion++;
+    if (currentQuestion < Questions.length - 1) {
+        currentQuestion++;
         loadQues();
     } else {
         document.getElementById("opt").remove()
         document.getElementById("ques").remove()
         document.getElementById("btn").remove()
         loadScore();
-        timeLeft = 999
+        timeLeft = 99999
         timeEl.remove()
 
     }
@@ -129,7 +131,7 @@ function nextQuestion() {
 function checkAns() {
     const selectedAns = parseInt(document.querySelector('input[name="answer"]:checked').value);
  
-    if (Questions[currQuestion].a[selectedAns].isCorrect) {
+    if (Questions[currentQuestion].a[selectedAns].isCorrect) {
         score++;
         console.log("Correct")
         nextQuestion();
@@ -139,12 +141,13 @@ function checkAns() {
     }
 }
 var scoreList = document.querySelector("#scoreList");
-var initials = document.querySelector("#initialsinput").value
 var saveScore = document.querySelector("#saveScore");
 saveScore.addEventListener("submit", function(event) {
-    event.preventDefault
+    event.preventDefault();
+    var initials = document.querySelector("#initialsinput")
     var li = document.createElement("li")
     li.textcontext = initials + score
     scoreList.appendChild(li)
-})
+    scores.style.display="flex"
 
+})
