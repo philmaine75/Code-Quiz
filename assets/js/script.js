@@ -1,12 +1,36 @@
-var welcome = document.querySelector("#welcome");
-var panel = document.querySelector("#panel");
+var welcome = document.querySelector(".welcome");
+var panel = document.querySelector(".panel");
 var start = document.getElementById("start");
+var failure = document.querySelector(".failure");
 
-start.addEventListener("click", function(){
-    welcome.setAttribute("display", "none")
-    panel.setAttribute("display", "flex")
-})
-    
+    start.addEventListener("click", function(){
+
+        welcome.style.display = "none";
+        panel.style.display = "flex";
+        countdown()
+    });
+
+    var timeEl = document.getElementById("timer")
+    var timeLeft = 30;
+    function countdown() {
+        
+      var timeInterval = setInterval(function () {
+        if (timeLeft > 1) {
+          timeEl.textContent = timeLeft + ' seconds remaining';
+          timeLeft--;
+        } else if (timeLeft === 1) {
+          timeEl.textContent = timeLeft + ' second remaining';
+          timeLeft--;
+        } 
+        else {
+          timeEl.textContent = ''
+          clearInterval(timeInterval);
+          panel.style.display = "none";
+          failure.style.display = "flex";
+        }
+      }, 1000);
+    }
+
 
 
 const Questions = [{
@@ -39,7 +63,7 @@ const Questions = [{
  
 ]
  
-let currQuestion = 0
+var currQuestion = 0
 let score = 0
  
 function loadQues() {
@@ -64,16 +88,29 @@ function loadQues() {
         choicesdiv.appendChild(choiceLabel);
         opt.appendChild(choicesdiv);
     }
+    
 }
 
 loadQues();
- 
+var next = document.createElement("button")
+const totalScore = document.getElementById("score")
 function loadScore() {
-    const totalScore = document.getElementById("score")
+   
+    
     totalScore.textContent = `You scored ${score} out of ${Questions.length}`
+    totalScore.appendChild(next)
+    next.textContent = "Continue"
+    next.style.marginLeft = "30px"
 }
- 
- 
+next.addEventListener("click", function(){
+    var form = document.querySelector(".form");
+    welcome.style.display = "none";
+    panel.style.display = "none";
+    form.style.display = "flex";
+    totalScore.remove()
+    
+})
+
 function nextQuestion() {
     if (currQuestion < Questions.length - 1) {
         currQuestion++;
@@ -83,6 +120,9 @@ function nextQuestion() {
         document.getElementById("ques").remove()
         document.getElementById("btn").remove()
         loadScore();
+        timeLeft = 999
+        timeEl.remove()
+
     }
 }
  
@@ -94,6 +134,17 @@ function checkAns() {
         console.log("Correct")
         nextQuestion();
     } else {
+        timeLeft -= 5;
         nextQuestion();
     }
 }
+var scoreList = document.querySelector("#scoreList");
+var initials = document.querySelector("#initialsinput").value
+var saveScore = document.querySelector("#saveScore");
+saveScore.addEventListener("submit", function(event) {
+    event.preventDefault
+    var li = document.createElement("li")
+    li.textcontext = initials + score
+    scoreList.appendChild(li)
+})
+

@@ -9,8 +9,15 @@ body {
     flex-direction: column;
     align-items: center;
     color: navy;
-    
 }
+.form {
+    margin-top: 8%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    color: navy;
+}
+
  .welcome{
     margin-top: 8%;
     display: flex;
@@ -22,12 +29,36 @@ body {
     font-size: 30px;
     margin-bottom: 20px;
 }
- 
+.failure{
+    margin-top: 8%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 40%;
+    color: rgb(0, 0, 0);
+    background-color: aqua;
+    width: 20%;
+ }
+
 .options {
     font-size: 20px;
     margin-right: 9%;
 }
- 
+.scores{margin-top: 8%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    
+}
+ #timer{
+    color: rgb(191, 134, 224);
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 80%;
+ }
 button {
     margin-top: 20px;
     margin-right: 25px;
@@ -44,4 +75,8 @@ button {
 #score {
     font-size: 30px;
     color: darkslategray;
+}
+
+#timer{
+    font-size: 30px;
 }

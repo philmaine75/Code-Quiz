@@ -20,16 +20,36 @@
     </div>
 
     <div class="panel">
-        <h1>Quiz Application Using JavaScript</h1>
         <div class="question" id="ques"></div>
         <div class="options" id="opt"></div>
         <button onclick="checkAns()" id="btn">SUBMIT</button>
         <div id="score"></div>
-        <script src="assets/js/script.js"></script>
     </div>
- 
+
+    <div>
+        <h1 id="timer">Timer</h1>
+    </div>
+
+    <div class = "failure">
+        <h1>Out of Time!</h1>
+        <button onClick="window.location.reload();">Try Again?</button>
+    </div>
+
+    <div class = "form">
+        <form id="saveScore" method="POST">
+            <label for="initialsinput">Save your score:</label>
+            <input type="text" placeholder="Enter your initials" name = "initials" id = "initials"></form>
+    </div>
+
+    <div class = "scores">
+        <ul id="scoreList">
+            <li>sdfsdf</li>
+        </ul>
+    </div>
+    <script src="assets/js/script.js"></script>
 </body>
  
+
 </html>
 
 
